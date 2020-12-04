@@ -13,10 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.seasons');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('seasons', 'SeasonController');
+
+Route::resource('dishes', 'DishController');
+
+Route::resource('ingredients', 'IngredientController');

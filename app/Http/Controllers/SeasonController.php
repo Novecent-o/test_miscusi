@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Season;
+
 class SeasonController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        //
+        $seasons = Season::all();
+
+        return view('guest.seasons.index', compact('seasons'));
     }
 
     /**
@@ -43,9 +47,9 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Season $season)
     {
-        //
+        return view('guest.seasons.show', compact('season'));
     }
 
     /**
