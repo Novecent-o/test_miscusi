@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Season;
+use App\Dish;
 
 class SeasonController extends Controller
 {
@@ -49,7 +50,9 @@ class SeasonController extends Controller
      */
     public function show(Season $season)
     {
-        return view('guest.seasons.show', compact('season'));
+        $dishes = Dish::all();
+
+        return view('guest.seasons.show', compact('season', 'dishes'));
     }
 
     /**

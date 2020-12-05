@@ -10903,3 +10903,22 @@ a.text-dark:focus {
   }
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  min-height: calc(100vh - 286px);
+}
+
+a {
+  text-decoration: none !important;
+  color: white;
+}
+
+a:hover {
+  color: black;
+}
+

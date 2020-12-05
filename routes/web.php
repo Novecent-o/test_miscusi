@@ -13,17 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-Route::get('/', function () {
-    return view('guest.seasons');
-});
+Route::get('/', 'SeasonController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 Route::resource('seasons', 'SeasonController');
 
