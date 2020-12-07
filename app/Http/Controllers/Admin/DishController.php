@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -87,11 +89,8 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dish $dish)
-    {   
-        // $dish->delete();
-        // // dd($dish);
-
-        // return view('guest.seasons.show');
+    public function destroy($id)
+    {
+        //
     }
 }

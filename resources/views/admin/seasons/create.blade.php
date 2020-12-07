@@ -8,7 +8,16 @@
                     <h1>ciao sono create</h1>
                 </div>
                 <div class="card">
-                    <form action="{{ route('dishes.store') }}" method="post">
+                  @if ($errors->any())
+                    <div class="alert alert-danger">
+                      <ul>
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
+                    <form action="{{ route('admin.seasons.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         @method('POST')
                       
@@ -20,6 +29,11 @@
                         <div>
                           <label>Menù ID: </label>
                           <input type="number" name="season_id" value="{{ old('season_id') }}">
+                        </div>
+
+                        <div>
+                          <label>Tipo: </label>
+                          <input type="text" name="type" value="{{ old('type') }}">
                         </div>
                       
                         <div>
@@ -34,7 +48,7 @@
                       
                         <div>
                           <label>Immagine: </label>
-                          <input type="text" name="image" value="{{ old('image') }}">
+                          <input type="file" name="image" accept="image/*" value="{{ old('image') }}">
                         </div>
                       
                         <div>
@@ -42,6 +56,7 @@
                         </div>
                       
                       </form>
+
                 </div>
             </div>
         </div>

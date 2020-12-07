@@ -15,6 +15,10 @@ class Dish extends Model
         'image',
     ];
 
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
     public function season() {
         return $this->belongsTo('App\Season');
     }

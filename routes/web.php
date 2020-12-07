@@ -20,12 +20,16 @@ Route::get('/', 'SeasonController@index')->name('home');
 
 Auth::routes();
 
-// Route::prefix('admin')
-//     ->namespace('Admin')
-//     ->middleware('auth')
-//     ->group(function () {
-//         Route::get('/', 'HomeController@index')->name('home');
-// });
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->middleware('auth')
+    ->group(function () {
+        // Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/seasons', 'SeasonController@index');
+        Route::resource('/seasons', 'SeasonController');
+        Route::resource('/dishes', 'DishController');
+});
 
 Route::get('/home', 'HomeController@index');
 
