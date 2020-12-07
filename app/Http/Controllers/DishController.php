@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Season;
+use App\Dish;
+use App\User;
+
 class DishController extends Controller
 {
     /**
@@ -23,7 +29,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.seasons.create');
     }
 
     /**
@@ -43,9 +49,13 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dish $dish)
     {
-        //
+        $seasons = Season::all();
+        $user_id = Auth::id();
+        $user = Auth::user();
+
+        return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
     }
 
     /**
@@ -77,8 +87,11 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Dish $dish)
+    {   
+        $dish->delete();
+        // dd($dish);
+
+        return view('guest.seasons.show');
     }
 }

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Season;
 use App\Dish;
+use App\User;
 
 class SeasonController extends Controller
 {
@@ -51,8 +54,10 @@ class SeasonController extends Controller
     public function show(Season $season)
     {
         $dishes = Dish::all();
+        $user_id = Auth::id();
+        $user = Auth::user();
 
-        return view('guest.seasons.show', compact('season', 'dishes'));
+        return view('guest.seasons.show', compact('season', 'dishes', 'user'));
     }
 
     /**
@@ -85,7 +90,7 @@ class SeasonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+       //
     }
 }

@@ -16,7 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'SeasonController@index')->name('home');
 
+// Route::get('/seasons/{seasons}', 'SeasonController@destroy')->name('seasons.destroy');
+
 Auth::routes();
+
+// Route::prefix('admin')
+//     ->namespace('Admin')
+//     ->middleware('auth')
+//     ->group(function () {
+//         Route::get('/', 'HomeController@index')->name('home');
+// });
 
 Route::get('/home', 'HomeController@index');
 
