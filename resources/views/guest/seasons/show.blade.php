@@ -9,7 +9,7 @@
                     <h2>{{$season->name}}</h2>
                     @foreach ($season->dishes as $dish)
                         <li class="card px-3 bg-danger d-inline">
-                            <a href="{{ route('dishes.show', $dish->id) }}">
+                            <a href="{{ (Auth::check()) ? route('admin.dishes.show', $dish->id) : route('dishes.show', $dish->id) }}">
                                 {{$dish->name}}
                             </a>
                         </li>
@@ -18,13 +18,8 @@
             </div>
             <div class="col-12 d-flex justify-content-around">
                 <button type="button" class="btn btn-secondary">
-                    <a href="{{ route('seasons.index') }}">Indietro</a>
+                    <a href="{{ (Auth::check()) ? route('admin.seasons.index') : route('seasons.index') }}">Indietro</a>
                 </button>
-                @if (!is_null($user))
-                    <button type="button" class="btn btn-secondary">
-                        <a href="{{ route('admin.seasons.create') }}">Aggiungi</a>
-                    </button>
-                @endif
             </div>
         </div>
     </div>

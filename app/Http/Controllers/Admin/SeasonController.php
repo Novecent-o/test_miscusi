@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Season;
 use App\Dish;
+use App\Ingredient;
 use App\User;
 
 class SeasonController extends Controller
@@ -44,8 +45,10 @@ class SeasonController extends Controller
     {
         $user = Auth::user();
         $dishes = Dish::all();
+        $seasons = Season::all();
+        $ingredients = Ingredient::all();
 
-        return view('admin.seasons.create',compact('dishes', 'user'));
+        return view('admin.seasons.create',compact('dishes', 'user', 'seasons', 'ingredients'));
     }
 
     /**
@@ -56,14 +59,7 @@ class SeasonController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=> 'required|max:255',
-            'method'=> 'required',
-            'season_id'=> 'required|min:1|max:4',
-            'type'=> 'required|max:255',
-            'price'=> 'required|max:999,99',
-            'image'=> 'required|image',
-        ]);
+        $request->validate($this->getValidation());
 
         if (Auth::check()) {
             $request_data = $request->all();
@@ -110,9 +106,9 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        return view('admin.seasons.edit', compact('dish'));
     }
 
     /**
@@ -122,9 +118,18 @@ class SeasonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $request->validate($this->getValidation());
+
+        $data = $request->all();
+
+        $dish->update($data);
+
+        $dish_updated = $dish->update($data);
+        if ($dish_updated) {
+            return redirect()->route('admin.dishes.show', $dish);
+        }
     }
 
     /**
@@ -136,5 +141,17 @@ class SeasonController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getValidation()
+    {
+      return [
+        'name'=> 'required|max:255',
+        'method'=> 'required',
+        'season_id'=> 'required|min:1|max:4',
+        'type'=> 'required|max:255',
+        'price'=> 'required|max:999,99',
+        'image'=> 'required|image',
+      ];
     }
 }

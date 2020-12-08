@@ -14,7 +14,7 @@
                     <ul class="d-flex pl-0 mb-0 justify-content-around">
                         @foreach ($seasons as $season)
                             <li class="card px-3 bg-danger d-inline">
-                                <a href="{{ route('seasons.show', $season->id) }}">
+                                <a href="{{ (Auth::check()) ? route('admin.seasons.show', $season->id) : route('seasons.show', $season->id) }}">
                                     {{$season->name}}
                                 </a>
                             </li>

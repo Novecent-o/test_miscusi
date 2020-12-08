@@ -57,7 +57,11 @@ class DishController extends Controller
         $user_id = Auth::id();
         $user = Auth::user();
 
-        return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
+        if (Auth::check()) {
+            return view('admin.dishes.show', compact('dish', 'seasons', 'user'));
+        } else {
+            return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
+        }
     }
 
     /**
@@ -66,9 +70,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        // dd($dish);
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -78,9 +83,18 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $request->validate($this->getValidation());
+
+        $data = $request->all();
+
+        $dish->update($data);
+
+        $dish_updated = $dish->update($data);
+        if ($dish_updated) {
+            return redirect()->route('admin.dishes.show', $dish);
+        }
     }
 
     /**
@@ -89,8 +103,22 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        //
+        $dish->delete();
+
+        return redirect()->route('admin.seasons.index');
+    }
+
+    public function getValidation()
+    {
+      return [
+        'name'=> 'required|max:255',
+        'method'=> 'required',
+        'season_id'=> 'required|min:1|max:4',
+        'type'=> 'required|max:255',
+        'price'=> 'required|max:999,99',
+        'image'=> 'required|image',
+      ];
     }
 }

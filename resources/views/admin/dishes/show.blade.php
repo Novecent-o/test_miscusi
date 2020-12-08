@@ -24,6 +24,14 @@
                     <button type="button" class="btn btn-secondary">
                         <a href="{{ (Auth::check()) ? route('admin.seasons.show', $dish->season->id) : route('seasons.show', $dish->season->id) }}">Indietro</a>
                     </button>
+                    <button type="button" class="btn btn-secondary">
+                        <a href="{{ route('admin.dishes.edit', $dish->id) }}">Modifica</a>
+                    </button>
+                    <form action="{{ route('admin.dishes.destroy', $dish->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input class="btn btn-danger left m-1" type="submit" value="Elimina">
+                    </form>
                 </div>
             </div>
         </div>
