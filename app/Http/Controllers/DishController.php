@@ -49,13 +49,13 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Dish $dish)
+    public function show($id)
     {
-        $seasons = Season::all();
-        $user_id = Auth::id();
-        $user = Auth::user();
+        // $seasons = Season::all();
+        // $user_id = Auth::id();
+        // $user = Auth::user();
 
-        return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
+        // return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
     }
 
     /**

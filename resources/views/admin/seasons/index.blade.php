@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h1>Scegli il menù stagionaleee</h1>
+                        <h1>Scegli il menù stagionale</h1>
                     </div>
                 </div>
 

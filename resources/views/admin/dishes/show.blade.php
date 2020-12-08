@@ -17,6 +17,11 @@
                             <li>{{$dish->method}}</li>
                             <li>€{{$dish->price}}</li>
                             <li><img src="{{$dish->image}}" alt="{{$dish->name}}"></li>
+                            <li>
+                                @foreach ($dish->ingredients as $ingredient)
+                                    <span>{{$ingredient->name}} </span>
+                                @endforeach
+                            </li>
                         </ul>
                     </div>
                 </div>

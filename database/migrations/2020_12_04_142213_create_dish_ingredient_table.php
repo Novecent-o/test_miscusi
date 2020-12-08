@@ -18,14 +18,12 @@ class CreateDishIngredientTable extends Migration
             $table->unsignedBigInteger("dish_id");
             $table->foreign("dish_id")
                 ->references("id")
-                ->on("dishes")
-                ->onDelete("cascade");
+                ->on("dishes");
 
             $table->unsignedBigInteger("ingredient_id");
             $table->foreign("ingredient_id")
                 ->references("id")
-                ->on("ingredients")
-                ->onDelete("cascade");
+                ->on("ingredients");
         });
     }
 

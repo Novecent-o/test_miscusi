@@ -51,7 +51,7 @@
                         <input type="file" name="image" accept="image/*" value="{{ old('image') }}">
                       </div>
 
-                      {{-- @foreach ($ingredients as $ingredient)
+                      @foreach ($ingredients as $ingredient)
                         <div class="col-4 col-lg-2 text-center">
                           <label title="{{ $ingredient->name }}">
                             {{ $ingredient->name }}
@@ -59,7 +59,7 @@
                             <span class="checkmark"></span>
                           </label>
                         </div>
-                      @endforeach --}}
+                      @endforeach
                     
                       <div>
                         <input type="submit" name="" value="Salva">

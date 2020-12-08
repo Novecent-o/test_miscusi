@@ -10909,6 +10909,10 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+body {
+  color: #AE1921;
+}
+
 main {
   min-height: calc(100vh - 285px);
 }
@@ -10920,5 +10924,13 @@ a {
 
 a:hover {
   color: black;
+}
+
+header {
+  background-color: #F5F1EC;
+}
+
+footer {
+  background-color: #C8B8A7;
 }
 

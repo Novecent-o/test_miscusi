@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Season;
 use App\Dish;
+use App\Ingredient;
 use App\User;
 
 class DishController extends Controller
@@ -56,11 +57,12 @@ class DishController extends Controller
         $seasons = Season::all();
         $user_id = Auth::id();
         $user = Auth::user();
+        $ingredients = Ingredient::all();
 
         if (Auth::check()) {
-            return view('admin.dishes.show', compact('dish', 'seasons', 'user'));
+            return view('admin.dishes.show', compact('dish', 'seasons', 'user', 'ingredients'));
         } else {
-            return view('guest.dishes.show', compact('dish', 'seasons', 'user'));
+            return view('guest.dishes.show', compact('dish', 'seasons', 'user', 'ingredients'));
         }
     }
 
@@ -72,8 +74,9 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        // dd($dish);
-        return view('admin.dishes.edit', compact('dish'));
+        $ingredients = Ingredient::all();
+
+        return view('admin.dishes.edit', compact('dish', 'ingredients'));
     }
 
     /**
@@ -105,6 +108,7 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
+        $dish->ingredients()->detach();
         $dish->delete();
 
         return redirect()->route('admin.seasons.index');

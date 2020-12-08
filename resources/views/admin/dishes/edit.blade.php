@@ -53,6 +53,13 @@
                         <label>Immagine: </label>
                         <input type="file" name="image" accept="image/*" value="{{ old('image') ? old('image') : $dish->image}}}">
                       </div>
+
+                      @foreach ($ingredients as $ingredient)
+                        <div>
+                          <input type="checkbox" name="ingredients[]" {{ ($dish->ingredients->contains($ingredient)) ? 'checked' : '' }} value="{{$ingredient->id}}">
+                          <label>{{$ingredient->name}}</label>
+                        </div>
+                      @endforeach
                     
                       <div>
                         <input type="submit" name="" value="Modifica">
