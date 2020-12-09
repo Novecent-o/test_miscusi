@@ -75,5 +75,14 @@ class DishesTableSeeder extends Seeder
             $newDish->save();
         }
 
+        $numbers = range(1, 14);
+        shuffle($numbers);
+
+        for ($i_ingredients = 0; $i_ingredients < rand(1, 14); $i_ingredients++) {
+            // Choose a service
+            $newDish->ingredients()->attach($numbers[$i_ingredients]);
+          }
+
+
     }
 }
