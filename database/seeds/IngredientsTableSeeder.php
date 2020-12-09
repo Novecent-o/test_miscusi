@@ -14,25 +14,29 @@ class IngredientsTableSeeder extends Seeder
     public function run()
     {
         $ingredients = [
-            'sale',
-            'pomodori',
-            'panna',
-            'prosciutto',
-            'aglio',
-            'limone',
-            'rucola',
-            'carne',
-            'burro',
-            'grana',
-            'olio',
-            'melanzane',
-            'ricotta',
-            'pesce',
+            ['sale'],
+            ['pomodori'],
+            ['panna'],
+            ['prosciutto'],
+            ['aglio'],
+            ['limone'],
+            ['rucola'],
+            ['carne'],
+            ['burro'],
+            ['grana'],
+            ['olio'],
+            ['melanzane'],
+            ['ricotta'],
+            ['pesce'],
         ];
 
-        foreach ($ingredients as $ingredient) {
+        for ($i_ingredients = 0; $i_ingredients < 14; $i_ingredients++) {
             $newIngredient = new Ingredient();
-            $newIngredient->name = $ingredient;
+    
+            // Name
+            $newIngredient->name = $ingredients[$i_ingredients][0];
+    
+            // Save
             $newIngredient->save();
         }
     }
