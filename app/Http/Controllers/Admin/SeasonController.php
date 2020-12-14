@@ -74,6 +74,11 @@ class SeasonController extends Controller
             $new_dish->image = $request_data['image'];
             $saved_dish = $new_dish->save();
         }
+
+        if (isset($request_data['ingredients'])) {
+
+            $new_dish->ingredients()->sync($request_data['ingredients']);
+        }
         
         if ($saved_dish) {
             return redirect()->route('admin.seasons.show', $saved_dish);
@@ -123,10 +128,20 @@ class SeasonController extends Controller
         $request->validate($this->getValidation());
 
         $data = $request->all();
+        $dish->name = $data['name'];
+        $dish->method = $data['method'];
+        $dish->season_id = $data['season_id'];
+        $dish->type = $data['type'];
+        $dish->price = $data['price'];
+        $dish->image = $data['image'];
+        $dish_updated = $dish->update();
 
-        $dish->update($data);
+        if (isset($data['ingredients'])) {
+            $dish->ingredients()->sync($data['ingredients']);
+        } else {
+            $dish->ingredients()->detach();
+        }
 
-        $dish_updated = $dish->update($data);
         if ($dish_updated) {
             return redirect()->route('admin.dishes.show', $dish);
         }

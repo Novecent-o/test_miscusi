@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Season;
 use App\Dish;
+use App\Ingredient;
 use App\User;
 
 class DishController extends Controller
@@ -62,9 +63,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -74,9 +75,19 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish, Ingredient $ingredient)
     {
-        //
+        $request->validate($this->getValidation());
+
+        $data = $request->all();
+
+        $dish->update($data);
+
+        $dish_updated = $dish->update($data);
+        if ($dish_updated) {
+            dd($dish_updated);
+            return redirect()->route('admin.dishes.show', $dish, $ingredient);
+        }
     }
 
     /**
@@ -91,5 +102,18 @@ class DishController extends Controller
         // // dd($dish);
 
         // return view('guest.seasons.show');
+    }
+
+    public function getValidation()
+    {
+      return [
+        'name'=> 'required|max:255',
+        'method'=> 'required',
+        'season_id'=> 'required|min:1|max:4',
+        'type'=> 'required|max:255',
+        'price'=> 'required|max:999,99',
+        'image'=> 'required|image',
+        'ingredient_id'=> 'required',
+      ];
     }
 }

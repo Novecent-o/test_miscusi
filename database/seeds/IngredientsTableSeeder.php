@@ -29,7 +29,12 @@ class IngredientsTableSeeder extends Seeder
             'ricotta',
             'pesce',
         ];
-
+        // for ($i=0; $i < count($ingredients) ; $i++) { 
+        //     $newIngredient = new Ingredient();
+        //     $ingredient = $ingredients[$i];
+        //     $newIngredient->name = $ingredient;
+        //     $newIngredient->save();
+        // }
         foreach ($ingredients as $ingredient) {
             $newIngredient = new Ingredient();
             $newIngredient->name = $ingredient;
